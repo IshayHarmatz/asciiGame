@@ -3,9 +3,8 @@
 .data
 Filename db 'test.txt',0
 filehandle dw ?
-NumOfBytes dw 10 
+NumOfBytes dw 10
 Buffer db 200 dup (0) 
-strlen db 0
 .code
 start:
       mov ax,@data
@@ -28,10 +27,8 @@ start:
       int 21h  
       
       ;put $ at the end
-      xor ax,ax
-      mov ax,NumOfBytes
       lea bx,Buffer
-      add bx,ax
+      add bx,ax ;ax has the number of bytes that read frof the file
       mov [bx],'$'       
       
       ;print file
