@@ -14,3 +14,5 @@ Steps to project.
 3.3.4 Let the user guess or play again with the same image.
 3.2 Open image in viewer  
 3.2.1 Open the image in C# Viewer.  
+
+הערת המורה 
