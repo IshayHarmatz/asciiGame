@@ -16,3 +16,4 @@ Steps to project.
 3.2.1 Open the image in C# Viewer.  
 
 הערת המורה 
+Please add a function
