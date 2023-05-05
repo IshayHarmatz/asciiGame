@@ -1,14 +1,37 @@
 .model small
 .stack 100h
-.data
-Filename db 'test.txt',0
+.data     
+msg1 db 13,10,'Enter a file name:','$'
 filehandle dw ?
 NumOfBytes dw 10
 Buffer db 200 dup (0) 
+str db 200
+strlen db 0
+Filename db 200 dup(0)
+crlf db 13,10,'$'
+
 .code
 start:
       mov ax,@data
       mov ds,ax 
+      
+      lea dx,msg1
+      mov ah,9h 
+      int 21h
+      
+      lea dx,str
+      mov ah,0ah
+      int 21h 
+      
+      mov ax,0
+      mov al,strlen
+      lea bx,Filename
+      add bx,ax
+      mov [bx],0 
+      
+      lea dx,crlf
+      mov ah,9h 
+      int 21h
       
       ;open file
       mov ah,3dh
@@ -39,8 +62,8 @@ start:
 exit:
 mov ah,4ch
 int 21h
-end      
-       
+end 
+
       
       
       
