@@ -1,4 +1,4 @@
-# asciiGame
+# asciiGame 🎮
 view ascii images
 
 Steps to project.
@@ -12,8 +12,42 @@ Steps to project.
 3.3.2 Ask the user how many character he would like to guess.   
 3.3.3 Print from the file till the end or number of character.   
 3.3.4 Let the user guess or play again with the same image.
-3.2 Open image in viewer  
-3.2.1 Open the image in C# Viewer.  
+## פרטים על הפרויקט והעבודה
 
-הערת המורה 
-Please add a function
+שם הפרוייקט: asciiGame
+
+שם מתכנת: ישי חרמץ
+
+
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=IshayHarmatz)](https://github.com/anuraghazra/github-readme-stats)
+
+
+מורה: ברק צוברי👑
+
+כיתה: י'5
+
+בית ספר: ישיבת בני עקיבא גבעת שמואל
+
+ ![הורדה (11)](https://github.com/IshayHarmatz/asciiGame/assets/117118962/0321ac9c-8c7d-4d46-bf92-381b3e10799d)
+
+שנת הגשה: 2023
+
+מה התוכנית עושה-
+
+התוכנית קולטת מהמשתמש עד 10 שמות של קבצים. אחר כך היא מגרילה קובץ מתוך הקבצים שהתקבלו.
+המשתמש כותב כמה תווים הוא רוצה לראות מהקובץ והתוכנה מדפיסה בראש העמוד את הקובץ הרנדומלי לפי מספר התווים שהתקבלו מהמשתמש. 
+לאחר מכן המשתמש יצטרך לנחש באיזה קובץ מדובר, אם יצליח תודפס הודעה מתאימה והתוכנית תגמר.
+אם הוא יטעה תהיה לו אפשרות להמשיך במשחק או לסיים אותו. אם יבחר להמשיך לשחק יוכל לכתוב כמה תווים נוספים הוא רוצה לראות מהקובץ ואחר לנחש וחוזר חליליה עד שידפסו כל התווים ויהיה למשתשמש ניסיון אחד לנחש נכון אחרת יפסיד.
+
+הפעולות שהמשתמש יכול לבצע-
+
+המשתמש יכול לקרוא את ההוראות של המשחק והוא יכול לשחק במשחק פעם אחת עד שהוא מנצח, פורש או שכל תווים בקובץ הודפסו.
+בתוך המשחק עצמו המשתמש יכול להכניס עד 10 שמות של קבצים, הוא יכול לבחור כמה תווים לראות מהקובץ הרנדומלי.
+המשתמש יכול גם להחליט אם הוא פורש או ממשיך לשחק אחרי שניחש לא נכון(אלא אם כן כל התווים כבר הודפסו).
+אם הוא ממשיך לשחק הוא יכול לראות יותר תווים מהקובץ ולנחש...
+
+תמונות ריצה עם הסברים-
+
+![צילום מסך 2023-05-31 222708](https://github.com/IshayHarmatz/asciiGame/assets/117118962/5be35796-16c6-4b40-aa56-5f6ca20e3002)
+
+בתמונה רואים שהתוכנית שואלת את המשתמש אם הוא רוצה לקרוא את ההוראות של המשחק או לא. במקרה זה המשתמש כתב yes כלומר הוא רוצה לראות את ההוראות, לכן התוכנית הדפיסה את הוראות המשחק.
