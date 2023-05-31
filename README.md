@@ -13,10 +13,13 @@ Steps to project.
 3.3.3 Print from the file till the end or number of character.   
 3.3.4 Let the user guess or play again with the same image.
 
-שם הפרוייקט:# asciiGame 
+שם הפרוייקט: asciiGame 
 שם מתכנת: ישי חרמץ
 
+
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=IshayHarmatz)](https://github.com/anuraghazra/github-readme-stats)
+
+
 מורה: ברק צוברי
 כיתה: י'5
 בית ספר: ישיבת בני עקיבא גבעת שמואל
