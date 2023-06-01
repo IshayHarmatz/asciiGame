@@ -7,7 +7,7 @@ msg3 db 13,10,'Guess which file it is :',13,10,'$';to print a msg for get guess 
 msg4 db 13,10,'Well done! You were right',13,10,'$' ;to print a msg that say you guess the right file
 msg5 db 13,10,'You failed!',13,10,'$'; to say you wrong and ask if yow want keep plaing        
 msg6 db 13,10,'Enter any key to exit:','$' ;to end the program
-msg7 db 'Enter yes to see the instructions and other key to start the game:',13,10,'$'; ask if you want see the instructions
+msg7 db 'Enter a to see the instructions and other key to start the game:',13,10,'$'; ask if you want see the instructions
 msg8 db 13,10,'At first you enter up to 10 file names.'; the instuctions
      db 13,10,'Then you write how many characters you want to see from the file.'  ; the instuctions
      db 13,10,'At the end you guess which file it is. If you are right the game is over.' ; the instuctions
@@ -16,11 +16,11 @@ msg8 db 13,10,'At first you enter up to 10 file names.'; the instuctions
 msg9 db 13,10,'Invalid Number! Try again$'; erorr input number msg
 msg10 db 13,10,'The game is over because there is no file input at all!$'; when there is no file input from user 
 msg11 db 13,10,'The program printed all the characters so the game is over!$'; when there is no file input from user 
-msg12 db 'Enter yes for keep playing and other thing to over the game',13,10,'$'; ask if the user want to keep playing
+msg12 db 'Enter a for keep playing and other key to over the game',13,10,'$'; ask if the user want to keep playing
 msg13 db 'Sorry but the program can not open the file, the game is over',13,10,'$'
-instr db 4  ; to get the answer if he want to see the instructions  
+instr db 3  ; to get the answer if he want to see the instructions  
 instrlen db 0 ; the length of the answer
-instrAnswer dw 4 dup (0)  ; the answer is placed here
+instrAnswer dw 3 dup (0)  ; the answer is placed here
 returnAddress dw ? ; to return from a function to the ip place
 filehandle dw ?  ; to see if you can print a file
 NumOfBytes dw 10  ; The amount of characters that the program print from a file
@@ -65,15 +65,11 @@ bytes db 5 dup(0); the num of bytes to print from file
 strGuss db 100    ; to get the user guess of the file name 
 strGusslen db 0   ; the length of the user guess
 FileGuess db 100 dup(0) ; the guess witch file it is;
-strAn db 4  ;  to get the user answer if he wants to keep playing
-Anlen7 db 0   ; the answer length
-Answer dw 4 dup(0) ;  the answer of the user if he wants to keep playing
 totalBytes dw 100 dup(0) ; the total bytes (from the start of the program) that need to print from the file   
 mone dw ? ; the number to print 10 characters from the file
 macpil dw 1 ; to convert micidot to asarot and meot...
 sherit dw ? ; to keep the sherit of bytes that need to print and it less then 10
 result dw 0 ; the number of bytes that need to print after the convert
-Yes dw 'yes' ; check if the user want keep playing or see the instructions
 fileAddres dw 0 ; to keep the offset of the random file
  
 .code  
@@ -86,13 +82,13 @@ start:
       mov ah,9h 
       int 21h
       
-      lea dx,instr  ; grt into instrAnswer the input - if he want to see the instructions
-      mov ah,0ah
+                 
+      mov ah,01h  ; get into al the input - if he want to see the instructions
       int 21h
       
-      mov ax,[instrAnswer]  ; check if the answer is yes
-      cmp ax,[Yes]
-      jne startGame   ; if it isn't yes don't print the instructions
+     
+      cmp al,'a'
+      jne startGame   ; if it isn't a don't print the instructions
       
       call instructions  ; if it is yes call instructions
 startGame:
@@ -358,13 +354,12 @@ fail:
       lea dx,msg12  ; print msg 12
       mov ah,9h
       int 21h
-      
-      lea dx,strAn  ;get the user answer 
-      mov ah,0ah
+                    
+      mov ah,01h    ;get the user answer into al
       int 21h
        
-      mov ax,[Yes]
-      cmp [Answer],ax  ; check if the user want to keep playing(yes) 
+     
+      cmp al,'a'  ; check if the user want to keep playing(a) 
       je again
       jmp endGame
       
