@@ -18,7 +18,6 @@ Steps to project.
 
 שם מתכנת: ישי חרמץ
 
-
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=IshayHarmatz)](https://github.com/anuraghazra/github-readme-stats)
 
 
@@ -27,7 +26,6 @@ Steps to project.
 כיתה: י'5
 
 בית ספר: ישיבת בני עקיבא גבעת שמואל
-
 ![הורדה (11)](https://github.com/IshayHarmatz/asciiGame/assets/117118962/0321ac9c-8c7d-4d46-bf92-381b3e10799d)
 
 שנת הגשה: 2023
