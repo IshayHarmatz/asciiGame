@@ -67,7 +67,7 @@ strGusslen db 0   ; the length of the user guess
 FileGuess db 100 dup(0) ; the guess witch file it is;
 totalBytes dw 100 dup(0) ; the total bytes (from the start of the program) that need to print from the file   
 mone dw ? ; the number to print 10 characters from the file
-macpil dw 1 ; to convert micidot to asarot and meot...
+macpil dw 1 ; to convert micidot to asarot and meot(1-10-100-1000...)
 sherit dw ? ; to keep the sherit of bytes that need to print and it less then 10
 result dw 0 ; the number of bytes that need to print after the convert
 fileAddres dw 0 ; to keep the offset of the random file
@@ -121,7 +121,7 @@ startGame:
      
     
       call RandomFile   ;random a file and play the game
-      mov ax,0                                                        
+                                                              
       call CloseFile    ; close the open file                                                    
 exit:  
       lea dx,msg6
@@ -154,17 +154,17 @@ proc instructions
       ret
 endp instructions
 ;-------------------------------------------------------------------
-; the function accepts parameters:strOffset, FileOffset and strlenOffset by reference
+; the function accepts parameters:strOffset, FileOffset and strlenOffset by reference, the parameters help the function gets number of files
 ; the function gets until 10 file names and put them in the filename arrays that in the data
 proc GetFiles 
-    pop [returnAddress]
-    pop [FileOffset]  
-    pop [strlenOffset]
-    pop [strOffset]
+      pop [returnAddress]  ; the addres to return at the end of the function
+      pop [FileOffset]  
+      pop [strlenOffset]
+      pop [strOffset]
     
    
-    mov cx,10
-    mov si,0 
+      mov cx,10    ;geting until 10 files 
+      mov si,0 
 GetFile:
        
       lea dx,msg1
@@ -184,14 +184,14 @@ GetFile:
       je NotFile    ; if you got 0 end GetFile
       
       xor ax,ax
-      mov bx,[strlenOffset]
+      mov bx,[strlenOffset]  ; put 0 at the end of the file to be able to print him 
       add bx,si
       mov al,[bx]
       mov bx,[FileOffset]
       add bx,si
       lea bx,[bx]
       add bx,ax
-      mov [bx],0    ; put 0 at the end of the file to be able to print him 
+      mov [bx],0    
       add si,102d   ; go to the next fileOffset
       loop GetFile
 NotFile:
@@ -232,28 +232,29 @@ pushFileOffset:
       ret 2
 endp RandomFile 
 ; ------------------------------------------------------------- 
-; the function accepts strlen by value and fileoffset by reference
+; the function accepts strlen by value in order to compare the fileLen and the GuessLen and fileoffset by reference in order to print the file 
 ; the function gets number of bytes to print from the file and check if the guess input is correct
 proc PlayGame
       push bp
       mov bp,sp
       mov bx,[bp+4]  ;offset of the random file
        
-      mov [FileAddres],bx 
+      mov [FileAddres],bx   
 again:
-      mov [NumOfBytes],10   ; restart NumOfBytes by 10
+      mov [NumOfBytes],10d   ; restart NumOfBytes by 10
       
       
       call getANumber   ; get a number of characters to print from the file               
                 
       mov ah,3dh     ;open a file 
       xor al,al 
-      mov bx,[fileAddres]  ; bx has the random file offset
+      mov bx,[fileAddres]  ; bx has now the random file offset
       lea dx,[bx]
       int 21h 
       
       jc openError  ; can't open the file
-      mov [filehandle],ax
+      
+      mov [filehandle],ax ; the state of the file
       
       mov dh, 0    ; start print from the start of the screen
 	  mov dl, 0
@@ -290,7 +291,7 @@ PrintAFile:
       mov ah,9h 
       int 21h
       
-      cmp [NumOfBytes],10      
+      cmp [NumOfBytes],10d ; check if the program print the sherit now      
       jne endPrint 
       dec [mone]
       cmp [mone],0
@@ -348,7 +349,7 @@ fail:
       int 21h 
       
       pop ax  
-      cmp al,0      
+      cmp al,0              ; check if the program printed the whole file
       je AllTheCharsShown
       
       lea dx,msg12  ; print msg 12
@@ -404,7 +405,7 @@ getNumberAgain:
       
 length:            ;mul macpil by the length of the input number
       xor ax,ax
-      mov al,10
+      mov al,10d
       mul [macpil]
       mov [macpil],ax
       loop length
