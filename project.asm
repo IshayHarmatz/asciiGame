@@ -240,7 +240,7 @@ proc PlayGame
       mov bx,[bp+4]  ;offset of the random file
        
       mov [FileAddres],bx   
-again:
+playAgain:
       mov [NumOfBytes],10d   ; restart NumOfBytes by 10
       
       
@@ -361,7 +361,7 @@ fail:
        
      
       cmp al,'a'  ; check if the user want to keep playing(a) 
-      je again
+      je playAgain
       jmp endGame
       
 AllTheCharsShown:
