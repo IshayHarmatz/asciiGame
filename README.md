@@ -1,4 +1,4 @@
-# asciiGame 🎮
+# asciiGame 🎮💻
 view ascii images
 
 Steps to project.
