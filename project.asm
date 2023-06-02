@@ -7,11 +7,7 @@ msg3 db 13,10,'Guess which file it is :',13,10,'$';to print a msg for get guess 
 msg4 db 13,10,'Well done! You were right',13,10,'$' ;to print a msg that say you guess the right file
 msg5 db 13,10,'You failed!',13,10,'$'; to say you wrong and ask if yow want keep plaing        
 msg6 db 13,10,'Enter any key to exit:','$' ;to end the program
-<<<<<<< HEAD
 msg7 db 13,10,'Enter a to see the instructions and other key to start the game:',13,10,'$'; ask if you want see the instructions
-=======
-msg7 db 'Enter a to see the instructions and other key to start the game:',13,10,'$'; ask if you want see the instructions
->>>>>>> 7a20a6ecb2ba76a331e4d4eabb153dac9b84a8c9
 msg8 db 13,10,'At first you enter up to 10 file names.'; the instuctions
      db 13,10,'Then you write how many characters you want to see from the file.'  ; the instuctions
      db 13,10,'At the end you guess which file it is. If you are right the game is over.' ; the instuctions
@@ -21,7 +17,6 @@ msg9 db 13,10,'Invalid Number! Try again$'; erorr input number msg
 msg10 db 13,10,'The game is over because there is no file input at all!$'; when there is no file input from user 
 msg11 db 13,10,'The program printed all the characters so the game is over!$'; when there is no file input from user 
 msg12 db 'Enter a for keep playing and other key to over the game',13,10,'$'; ask if the user want to keep playing
-<<<<<<< HEAD
 msg13 db 'Sorry but the program can not open the file, the game is over',13,10,'$'                
 msg14 db 13,10,'                   _ _     _____'                               
       db 13,10,'    /\            (_|_)   / ____|'                     
@@ -31,9 +26,6 @@ msg14 db 13,10,'                   _ _     _____'
       db 13,10,'/_/    \_\___/\___|_|_|   \_____|\__,_|_| |_| |_|\___|',13,10,'$'  
                                                         
                                                                                                                                                                                  
-=======
-msg13 db 'Sorry but the program can not open the file, the game is over',13,10,'$'
->>>>>>> 7a20a6ecb2ba76a331e4d4eabb153dac9b84a8c9
 instr db 3  ; to get the answer if he want to see the instructions  
 instrlen db 0 ; the length of the answer
 instrAnswer dw 3 dup (0)  ; the answer is placed here
@@ -94,13 +86,10 @@ start:
       mov ax,@data
       mov ds,ax
       
-<<<<<<< HEAD
       lea dx,msg14  ; print msg14
       mov ah,09h
       int 21h
       
-=======
->>>>>>> 7a20a6ecb2ba76a331e4d4eabb153dac9b84a8c9
       lea dx,msg7   ; print msg7
       mov ah,9h 
       int 21h
@@ -388,7 +377,6 @@ fail:
       jmp endGame
       
 AllTheCharsShown:
-<<<<<<< HEAD
 
       lea dx,msg11 ;print msg 11
       mov ah,09h
@@ -494,113 +482,3 @@ proc CloseFile
 endp CloseFile
 
 end
-=======
->>>>>>> 7a20a6ecb2ba76a331e4d4eabb153dac9b84a8c9
-
-      lea dx,msg11 ;print msg 11
-      mov ah,09h
-      int 21h
-      
-      jmp endGame
-openError:
-      lea dx,msg13 ;print msg13
-      mov ah,09h
-      int 21h
-       
-endGame:      
-      pop bp
-      ret 4 
-endp PlayGame
-;-----------------------------------------------------------------
-; the fuction gets a string from the user and convert to a number.
-; then it divide the number by 10 and put at mone and sherit the results 
-proc getANumber
-           
-getNumberAgain:  
-      mov [macpil],1  ; restart the vars
-      mov [result],0
-       
-      lea dx,msg2   ; print msg2
-      mov ah,9h 
-      int 21h
-      
-      lea dx,strbyte   ; put the input in bytes
-      mov ah,0ah
-      int 21h 
-
-      xor cx,cx  
-      cmp [strbylen],1 ; check if the input is one digit
-      je oneDigit
-      mov cl,[strbylen]
-      dec cx 
-      
-length:            ;mul macpil by the length of the input number
-      xor ax,ax
-      mov al,10d
-      mul [macpil]
-      mov [macpil],ax
-      loop length
-      
-      mov cl,[strbylen] 
-      mov si,0
-convertToANumber:        ;make the input from string to a number
-      mov al,[bytes+si]
-      sub al,30h        ; make from ascii to number value
-      
-      cmp al,9          ;check if the dig is a number
-      ja invalid
-      
-      cmp al,0
-      jb invalid
-      xor ah,ah
-      mul [macpil]
-      add [result],ax 
-      mov ax,[macpil]
-      mov bx,10           ; 10 = numofbytes
-      div bx 
-      mov [macpil],ax
-      inc si            ; the next dig
-      loop convertToANumber
-       
-      mov cx,[result]   ; cx has the convert number
-      cmp cx, 0ffffh
-      ja invalid
-      jmp moreThenOneDigit
-       
-oneDigit:
-      sub [bytes],30h ; make from ascii to number value
-      mov cl,[bytes]
-      
-      cmp cl,9
-      ja invalid
-      
-      cmp cl,0
-      jb invalid
-moreThenOneDigit: 
-      add [totalBytes],cx   ; add the result to total bytes
-      mov ax,[totalBytes] 
-      xor dx,dx 
-      div [NumOfBytes]   ; div ax (the total bytes) by num of bytes(10) 
-      mov [mone],ax     ; mone gets the portion
-      mov [sherit],dx   ; mone gets the remainder  
-      ret 
-invalid:
-      lea dx,msg9
-      mov ah,09h
-      int 21h
-      
-      jmp getNumberAgain
-endp getANumber
-;----------------------------------------------------------------- 
-; the function close the open file
-proc CloseFile
-    mov ah,3Eh
-    mov bx,[filehandle]
-    int 21h   ; close the file
-    ret
-endp CloseFile
-
-end
-
-
-
