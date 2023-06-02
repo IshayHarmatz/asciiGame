@@ -20,7 +20,7 @@ Steps to project.
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=IshayHarmatz)](https://github.com/anuraghazra/github-readme-stats)
 
-מורה: ברק צוברי👑
+מורה: ברק צוברי
 
 כיתה: י'5
 
